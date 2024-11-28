@@ -1,44 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buscador de Jugadores</title>
-  <link rel="stylesheet" href="./assets/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Jugadores</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Buscador de Jugadores</h1>
-    <div class="search-box">
-      <label for="search">Ingrese el nombre del jugador a buscar:</label>
-      <input type="text" id="search" placeholder="Buscar jugador...">
-      <button id="search-btn">Buscar</button>
+    <div class="container">
+        <h1>Buscador de Jugadores</h1>
+        <label for="searchInput">Ingrese el nombre del jugador a buscar:</label>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar jugador">
+            <button id="searchButton">Buscar</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Posicion</th>
+                    <th>Jugador</th>
+                    <th>Equipo</th>
+                    <th>Nacionalidad</th>
+                    <th>LVL</th>
+                    <th>Sueldo</th>
+                    <th>Entrenamientos</th>
+                    <th>Club</th>
+                    <th>Prestamo</th>
+                    <th>Duracion</th>
+                    <th>Propietario</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Las filas de los jugadores se agregarán aquí -->
+            </tbody>
+        </table>
     </div>
 
-    <div class="table-container">
-      <table id="result-table">
-        <thead>
-          <tr>
-            <th>Posición</th>
-            <th>Jugador</th>
-            <th>Equipo</th>
-            <th>Nacionalidad</th>
-            <th>LVL</th>
-            <th>Sueldo</th>
-            <th>Entrenamientos</th>
-            <th>Club</th>
-            <th>Préstamo</th>
-            <th>Duración</th>
-            <th>Propietario</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Aquí se insertarán los resultados de la búsqueda -->
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <script src="scripts.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
