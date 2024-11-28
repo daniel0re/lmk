@@ -6,6 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Variable para almacenar los datos de jugadores
   let data = [];
 
+  // Función para normalizar y quitar tildes y caracteres especiales
+  function normalizeText(text) {
+    // Eliminar acentos, eñes y convertir a minúsculas
+    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  }
+
   // Función para cargar datos desde el archivo JSON
   async function loadData() {
     try {
@@ -22,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Función de búsqueda
   function searchPlayers() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const filteredData = data.filter(player => player[2].toLowerCase().includes(searchTerm));
-
+    const searchTerm = normalizeText(searchInput.value); // Normalizar el término de búsqueda
+    const filteredData = data.filter(player => normalizeText(player[2]).includes(searchTerm)); // Normalizar los nombres de los jugadores
+    
     tableBody.innerHTML = ''; // Limpiar la tabla antes de mostrar los resultados
     filteredData.forEach(player => {
       const row = document.createElement('tr');
@@ -58,6 +64,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
-
-
