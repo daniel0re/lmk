@@ -12,6 +12,7 @@ async function loadData() {
 
 // Función para normalizar el texto (quitar acentos y convertir a minúsculas)
 function normalizarTexto(texto) {
+  // Normalizamos el texto, eliminamos los caracteres diacríticos (acentos) y pasamos todo a minúsculas
   return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
@@ -25,44 +26,51 @@ function highlightMatch(text, term) {
 function searchPlayers(data) {
   const searchTerm = searchInput.value.toLowerCase(); // Obtener el término de búsqueda (en minúsculas)
   
+  // Normalizamos el término de búsqueda
+  const normalizedSearchTerm = normalizarTexto(searchTerm);
+
   // Filtrar los jugadores cuyo nombre coincida con el término de búsqueda
-  const filteredData = data.filter(player => normalizarTexto(player[2]).includes(searchTerm));
-  
+  const filteredData = data.filter(player => {
+    // Normalizamos el nombre del jugador para eliminar tildes y convertirlo a minúsculas
+    const normalizedName = normalizarTexto(player[2]); // El nombre del jugador está en la posición 2
+    return normalizedName.includes(normalizedSearchTerm);
+  });
+
   // Limpiar la tabla antes de mostrar los nuevos resultados
   tableBody.innerHTML = '';
-  
+
   // Verificar si la pantalla es pequeña (menos de 768px de ancho)
   const isSmallScreen = window.innerWidth < 768;
   
   // Iterar sobre los jugadores filtrados y añadirlos a la tabla
   filteredData.forEach(player => {
-      const row = document.createElement('tr'); // Crear una nueva fila de tabla
+    const row = document.createElement('tr'); // Crear una nueva fila de tabla
+    
+    // Iterar sobre los datos del jugador y añadir cada celda
+    player.slice(1, 12).forEach((cell, index) => {
+      // Omitir las columnas "Entrenamientos", "Club", y "Préstamo" si la pantalla es pequeña
+      if (isSmallScreen && (index === 2 || index === 5 || index === 6 || index === 7 || index === 8 || index === 9)) {
+        return; // No añadir estas celdas a la fila
+      }
       
-      // Iterar sobre los datos del jugador y añadir cada celda
-      player.slice(1, 12).forEach((cell, index) => {
-          // Omitir las columnas "Entrenamientos", "Club", y "Préstamo" si la pantalla es pequeña
-          if (isSmallScreen && (index === 0 || index === 5 || index === 6 || index === 7 || index === 8 || index === 9)) {
-              return; // No añadir estas celdas a la fila
-          }
-          
-          const td = document.createElement('td'); // Crear una nueva celda de tabla
-          td.innerHTML = highlightMatch(cell, searchTerm); // Resaltar las coincidencias en cada celda
-          row.appendChild(td); // Añadir la celda a la fila
-      });
-      
-      // Añadir la fila a la tabla
-      tableBody.appendChild(row);
+      const td = document.createElement('td'); // Crear una nueva celda de tabla
+      td.innerHTML = highlightMatch(cell, normalizedSearchTerm); // Resaltar las coincidencias en cada celda
+      row.appendChild(td); // Añadir la celda a la fila
+    });
+    
+    // Añadir la fila a la tabla
+    tableBody.appendChild(row);
   });
-  
+
   // Si no hay resultados, mostrar un mensaje
   if (filteredData.length === 0) {
-      const row = document.createElement('tr');
-      const td = document.createElement('td');
-      td.setAttribute('colspan', '11'); // Establecer que esta celda ocupa todas las columnas
-      td.textContent = 'No se encontraron resultados';
-      td.style.textAlign = 'center';
-      row.appendChild(td);
-      tableBody.appendChild(row);
+    const row = document.createElement('tr');
+    const td = document.createElement('td');
+    td.setAttribute('colspan', '11'); // Establecer que esta celda ocupa todas las columnas
+    td.textContent = 'No se encontraron resultados';
+    td.style.textAlign = 'center';
+    row.appendChild(td);
+    tableBody.appendChild(row);
   }
 }
 
@@ -75,13 +83,13 @@ const tableBody = document.getElementById('tableBody');
 loadData().then(data => {
   // Añadir el evento para que la búsqueda se realice al presionar Enter
   searchInput.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-          searchPlayers(data); // Ejecutar la búsqueda al presionar Enter
-      }
+    if (event.key === 'Enter') {
+      searchPlayers(data); // Ejecutar la búsqueda al presionar Enter
+    }
   });
 
   // Añadir el evento para que la búsqueda se realice al presionar el botón de Buscar
   searchButton.addEventListener('click', () => {
-      searchPlayers(data); // Ejecutar la búsqueda al hacer clic en el botón
+    searchPlayers(data); // Ejecutar la búsqueda al hacer clic en el botón
   });
 });
