@@ -99,6 +99,11 @@ td {
   font-weight: bold;
 }
 
+/* Estilos para las columnas ocultas en pantallas pequeñas */
+.hidden {
+  display: table-cell;
+}
+
 /* Estilos responsivos */
 @media (max-width: 768px) {
   .search-container {
@@ -121,6 +126,11 @@ td {
 
   th, td {
       padding: 8px;
+  }
+
+  /* Ocultar columnas "Entrenamientos", "Club", "Préstamo" */
+  .hidden {
+      display: none;
   }
 }
 
