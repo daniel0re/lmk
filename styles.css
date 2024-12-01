@@ -1,166 +1,191 @@
-/* Reseteo de márgenes y padding */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Fondo general y fuente base */
+/* Estilos generales */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
-  color: #333;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Estilo de contenedor principal */
 .container {
-  width: 95%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 15px;
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  margin-top: 50px;
+    width: 90%;
+    margin: 20px auto;
 }
 
-/* Título principal */
 h1 {
-  text-align: center;
-  color: #4CAF50;
-  margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-/* Etiqueta de búsqueda */
-label {
-  font-size: 16px;
-  margin-bottom: 10px;
-  display: block;
-  text-align: center;
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
-/* Contenedor de la caja de texto y botón */
-.search-container {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-/* Estilo de la caja de texto */
-#searchInput {
-  width: 300px;
-  padding: 10px;
-  font-size: 14px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-}
-
-/* Estilo del botón de búsqueda */
-#searchButton {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-#searchButton:hover {
-  background-color: #45a049;
-}
-
-/* Estilo para la tabla */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th, td {
-  padding: 10px;
-  text-align: center;
-  border: 1px solid #ddd;
-}
-
-th {
-  background-color: #4CAF50;
-  color: white;
-}
-
-td {
-  background-color: #f9f9f9;
-}
-
-/* Estilo de las coincidencias resaltadas */
-.highlight {
-  background-color: yellow;
-  font-weight: bold;
-}
-
-/* Paginación */
-.pagination {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.page-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.page-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* Estilos responsivos */
-@media (max-width: 768px) {
-  .search-container {
+.filter-item {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-  }
+    gap: 10px;
+    width: 200px;
+    min-width: 150px;
+}
 
-  #searchInput {
-    width: 80%;
-    margin-bottom: 10px;
-  }
+.filter-item label {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
 
-  #searchButton {
-    width: 80%;
-  }
+.filters select, .filters input, .filters button {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
 
-  table {
-    font-size: 12px;
-  }
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
 
-  th, td {
-    padding: 8px;
-  }
+.filters button {
+    cursor: pointer;
+    background-color: #007BFF;
+    color: #fff;
+    transition: background-color 0.3s;
+}
 
-  .hidden {
+.filters button:hover {
+    background-color: #0056b3;
+}
+
+#loadingIndicator {
     display: none;
-  }
+    text-align: center;
+    color: #007BFF;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: left;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Mejorar visibilidad y legibilidad */
+table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #007BFF;
+    color: white;
+    text-align: center;
+}
+
+/* Colores según el tipo de entrenamiento */
+.entrenamiento-leyenda {
+    background-color: #976f0a;
+    color: #333;
+}
+
+.entrenamiento-potenciado-rojo {
+    background-color: #a61c00;
+    color: #fff;
+}
+
+.entrenamiento-potenciado-azul {
+    background-color: #1155cc;
+    color: #fff;
+}
+
+.entrenamiento-potenciado-verde {
+    background-color: #00b050;
+    color: #fff;
+}
+
+.entrenamiento-p-verde {
+    background-color: #00ff00;
+    color: #333;
+}
+
+.entrenamiento-epico {
+    background-color: #9900ff;
+    color: #fff;
+}
+
+.entrenamiento-especial {
+    background-color: #ff9900;
+    color: #333;
+}
+
+/* Añadir un indicador de fila seleccionada */
+table tr.selected {
+    background-color: #f1f1f1;
+    border: 1px solid #007BFF;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    /* Ajustes para pantallas de tablet o dispositivos medianos */
+    .filters {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filters select, .filters input, .filters button {
+        width: 100%;
+    }
+
+    table th, table td {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .filter-item {
+        width: 100%;  /* Los filtros ocuparán todo el ancho en pantallas más pequeñas */
+    }
 }
 
 @media (max-width: 480px) {
-  h1 {
-    font-size: 24px;
-  }
+    /* Ajustes para pantallas móviles */
+    .filters select, .filters input, .filters button {
+        font-size: 12px;
+        padding: 8px;
+    }
 
-  table {
-    font-size: 10px;
-  }
+    table th, table td {
+        font-size: 12px;
+        padding: 8px;
+    }
 
-  th, td {
-    padding: 6px;
-  }
+    .filter-item label {
+        font-size: 12px;
+    }
+
+    /* Ajustar botones de filtro para dispositivos pequeños */
+    .filter-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
 }

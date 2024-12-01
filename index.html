@@ -3,46 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscador de Jugadores</title>
+    <title>Filtros de Jugadores</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Buscador de Jugadores</h1>
-        <label for="searchInput">Ingrese el nombre del jugador a buscar:</label>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Buscar jugador">
-            <button id="searchButton">Buscar</button>
+        <h1>Filtrar Jugadores</h1>
+        <div class="filters">
+            <!-- Filtro de Posición -->
+            <div class="filter-item">
+                <label for="positionFilter">Posición:</label>
+                <select id="positionFilter">
+                    <option value="">Selecciona Posición</option>
+                    <option value="PT">Portero</option>
+                    <option value="DEC">Defensa Central</option>
+                    <option value="LI">Lateral Izquierdo</option>
+                    <option value="LD">Lateral Derecho</option>
+                    <option value="MCD">Mediocentro Defensivo</option>
+                    <option value="MC">Mediocentro</option>
+                    <option value="MDI">Mediocentro Derecho</option>
+                    <option value="MDD">Mediocentro Izquierdo</option>
+                    <option value="MO">Mediapunta</option>
+                    <option value="EXI">Extremo Izquierdo</option>
+                    <option value="EXD">Extremo Derecho</option>
+                </select>
+            </div>
+
+            <!-- Filtro de Entrenamiento -->
+            <div class="filter-item">
+                <label for="trainingFilter">Entrenamiento:</label>
+                <select id="trainingFilter">
+                    <option value="">Selecciona Entrenamiento</option>
+                    <option value="Gratis">Gratis</option>
+                    <option value="Especial">Especial</option>
+                    <option value="P. Verde">P. Verde</option>
+                    <option value="Épico">Épico</option>
+                    <option value="E. P. Verde">E.P. Verde</option>
+                    <option value="E. P. Azul">E.P. Azul</option>
+                    <option value="E. P. Rojo">E.P. Rojo</option>
+                    <option value="Leyenda">Leyenda</option>
+                    <option value="">Ninguno</option>
+                </select>
+            </div>
+
+            <!-- Filtro de Propietario -->
+            <div class="filter-item">
+                <label for="ownerFilter">Propietario:</label>
+                <select id="ownerFilter">
+                    <option value="">Selecciona Propietario</option>
+                </select>
+            </div>
+
+            <!-- Filtro de Préstamo -->
+            <div class="filter-item">
+                <label for="loanFilter">Préstamo:</label>
+                <select id="loanFilter">
+                    <option value="">Selecciona Préstamo</option>
+                </select>
+            </div>
+
+            <!-- Filtro de Nivel -->
+            <div class="filter-item">
+                <label for="lvlFilter">Nivel:</label>
+                <select id="lvlFilter">
+                    <option value="">Selecciona Nivel</option>
+                    <option value="69">Menor a 69</option>
+                    <option value="70-74">70 - 74</option>
+                    <option value="75-79">75 - 79</option>
+                    <option value="80-82">80 - 82</option>
+                    <option value="82+">Más de 82</option>
+                </select>
+            </div>
+
+            <!-- Filtro de Búsqueda -->
+            <div class="filter-item">
+                <label for="searchInput">Buscar Jugador:</label>
+                <input type="text" id="searchInput" placeholder="Buscar Jugador">
+            </div>
+
+            <div class="filter-buttons">
+                <button id="searchButton">Buscar</button>
+                <button id="resetButton">Restablecer</button>
+            </div>
         </div>
-        <table>
+
+        <!-- Mensaje de no resultados -->
+        <div id="noResultsMessage" style="display: none;">No se encontraron jugadores.</div>
+
+        <!-- Tabla de Jugadores -->
+        <table id="jugadoresTable">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Pos</th>
                     <th>Jugador</th>
-                    <th class="hidden">Equipo</th>
+                    <th>Equipo</th>
                     <th>Nacionalidad</th>
                     <th>LVL</th>
-                    <th class="hidden">Sueldo</th>
-                    <th class="hidden">Entrenamientos</th>
-                    <th class="hidden">$ Valor</th>
-                    <th class="hidden">Prestamo</th>
-                    <th class="hidden">Duracion</th>
+                    <th style="width: 120px;">Sueldo</th>
+                    <th>Entrenamientos</th>
+                    <th style="width: 120px;">$ Valor</th>
+                    <th>Prestamo</th>
+                    <th>Duración</th>
                     <th>Propietario</th>
                 </tr>
             </thead>
-            <tbody id="tableBody">
-                <!-- Las filas de los jugadores se agregarán aquí -->
-            </tbody>
+            <tbody></tbody>
         </table>
-
-        <!-- Paginación -->
-        <div id="pagination" class="pagination">
-            <button id="prevPage" class="page-button">Anterior</button>
-            <span id="pageNumber">Página 1</span>
-            <button id="nextPage" class="page-button">Siguiente</button>
-        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
